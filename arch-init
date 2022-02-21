@@ -8,7 +8,7 @@ do
 done
 
 #refresh databases
-sudo pacman -Sy archlinux-keyring && sudo pacman -Su
+sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
 
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
@@ -36,7 +36,7 @@ do
           echo "$app already installed."
         else
           echo "Installing app: $app"
-          sudo pacman -Sy $app
+          sudo pacman --noconfirm -S $app
         fi
     '
     eval "$cmd"
@@ -69,7 +69,7 @@ do
           echo "$app already installed."
         else
           echo "Installing app: $app"
-          sudo pacman -Sy $app
+          sudo pacman --noconfirm -S $app
         fi
     '
     eval "$cmd"
@@ -113,7 +113,7 @@ do
           echo "$app already installed."
         else
           echo "Installing app: $app"
-          sudo pacman -Sy $app
+          sudo pacman --noconfirm -S $app
         fi
     '
     eval "$cmd"
