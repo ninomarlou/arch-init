@@ -1,0 +1,120 @@
+while getopts d:m:e: flag
+do
+    case "${flag}" in
+        d) device=${OPTARG};;
+        m) displaymanager=${OPTARG};;
+        e) desktopenvironment=${OPTARG};;
+    esac
+done
+echo "Device: $device";
+echo "Display Manager: $displaymanager";
+echo "Desktop Environment: $desktopenvironment";
+
+# --------------------- BASE APPS  --------------------------------
+# Apps to install based on device, regardless of DM or DE choices
+laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics"
+non_laptop_apps="nano sudo chromium git"
+
+if [ $device = "laptop" ]; then
+    cmd='
+        apps_to_install=$laptop_apps
+        echo "Installing base apps for a laptop: $apps_to_install"
+        '
+    eval "$cmd"
+else
+    cmd='
+        apps_to_install=$non_laptop_apps
+        echo "Installing base apps for a non-laptop: $apps_to_install"
+        '
+    eval "$cmd"
+fi
+
+for app in $apps_to_install
+do
+    cmd='
+        if pacman -Qs $app > /dev/null ; then
+          echo "$app already installed."
+        else
+          echo "Installing app: $app"
+          sudo pacman -Sy $app
+        fi
+    '
+    eval "$cmd"
+done
+
+# --------------------- Display Manager  --------------------------------
+
+case $displaymanager in
+    gdm)
+        echo 'GDM'
+        dm_to_install="gdm"
+        dm_to_start="gdm.service"
+        ;;
+    lightdm)
+        echo 'LightDM'
+        dm_to_install="lightdm lightdm-slick-greeter"
+        dm_to_start="lightdm.service"
+        ;;
+    *)
+        echo 'Invalid display manager selection. Installing gdm as default.'
+        dm_to_install="gdm"
+        dm_to_start="gdm.service"
+        ;;
+esac
+
+for app in $dm_to_install
+do
+    cmd='
+        if pacman -Qs $app > /dev/null ; then
+          echo "$app already installed."
+        else
+          echo "Installing app: $app"
+          sudo pacman -Sy $app
+        fi
+    '
+    eval "$cmd"
+done
+sudo systemctl enable $dm_to_start
+
+# --------------------- Display Manager: Misc  --------------------------------
+
+case $displaymanager in
+    lightdm)
+        sudo sed -i 's/#logind-check-graphical=false/logind-check-graphical=true/' /etc/lightdm/lightdm.conf
+        sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-slick-greeter/' /etc/lightdm/lightdm.conf
+        ;;
+    *)
+        ;;
+esac
+
+# --------------------- Desktop Environment --------------------------------
+# Apps to install based on  DE choices
+budgie_apps="budgie-desktop nautilus gnome-terminal gnome-tweak-tool gnome-shell-extensions gnome-control-center xdg-user-dirs network-manager-applet gvfs-smb accountsservice gnome-bluetooth gnome-menus gnome-session gnome-themes-extra graphene libibus libpeas libwnck3 mutter budgie-screensaver"
+gnome_apps="gnome-shell nautilus gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs networkmanager gnome-keyring gvfs-smb gnome-shell-extensions gnome-tweaks"
+
+case $desktopenvironment in
+    budgie)
+        de_to_install=$budgie_apps
+        ;;
+
+    gnome)
+        de_to_install=$gnome_apps
+        ;;
+    *)
+        echo 'Invalid desktop environment selection. Installing gnome as default.'
+        de_to_install=$gnome_apps
+        ;;
+esac
+
+for app in $de_to_install
+do
+    cmd='
+        if pacman -Qs $app > /dev/null ; then
+          echo "$app already installed."
+        else
+          echo "Installing app: $app"
+          sudo pacman -Sy $app
+        fi
+    '
+    eval "$cmd"
+done
