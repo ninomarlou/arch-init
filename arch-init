@@ -6,9 +6,9 @@ do
         e) desktopenvironment=${OPTARG};;
     esac
 done
-echo "Device: $device";
-echo "Display Manager: $displaymanager";
-echo "Desktop Environment: $desktopenvironment";
+
+#refresh databases
+sudo pacman -Sy archlinux-keyring && sudo pacman -Su
 
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
