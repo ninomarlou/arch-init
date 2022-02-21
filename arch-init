@@ -1,9 +1,10 @@
-while getopts d:m:e: flag
+while getopts d:m:e:u: flag
 do
     case "${flag}" in
         d) device=${OPTARG};;
         m) displaymanager=${OPTARG};;
         e) desktopenvironment=${OPTARG};;
+        u) username=${OPTARG};;
     esac
 done
 
@@ -118,3 +119,10 @@ do
     '
     eval "$cmd"
 done
+
+# --------------------- Create user --------------------------------
+if [[ $* == *-u* ]]; then
+    sudo useradd -m -g users -G wheel -s /bin/bash $username
+    passwd $username
+    sudo EDITOR=nano visudo
+fi
