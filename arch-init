@@ -124,5 +124,5 @@ done
 if [[ $* == *-u* ]]; then
     sudo useradd -m -g users -G wheel -s /bin/bash $username
     passwd $username
-    sudo EDITOR=nano visudo
+    sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 fi
