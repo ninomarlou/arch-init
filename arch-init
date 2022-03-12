@@ -28,7 +28,7 @@ do
     esac
 done
 echo $device
-break
+exit
 
 #refresh databases
 sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
