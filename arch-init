@@ -9,15 +9,17 @@ do
 done
 
 PS3='Please select your device: '
-options=("[1] Laptop" "[2] Others" "Quit")
+options=("Laptop" "Others" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "[1] Laptop")
-            echo "you chose laptop"
+        "Laptop")
+            device="laptop"
+            break
             ;;
-        "[2] Others")
-            echo "you chose another device"
+        "Others")
+            device="others"
+            break
             ;;
         "Quit")
             break
@@ -25,7 +27,7 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
-
+echo $device
 #refresh databases
 sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
 
