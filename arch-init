@@ -22,12 +22,72 @@ do
             break
             ;;
         "Quit")
-            break
+            exit
             ;;
-        *) echo "invalid option $REPLY";;
+        *) 
+            echo "invalid option $REPLY"
+            exit
+            ;;
     esac
 done
-echo $device
+
+PS3='Please select a display manager to use: '
+options=("gdm" "lightdm" "pantheon" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "gdm")
+            displaymanager="gdm"
+            break
+            ;;
+        "lightdm")
+            displaymanager="lightdm"
+            break
+            ;;
+        "pantheon")
+            displaymanager="pantheon"
+            exit
+            ;;
+        "Quit")
+            quit
+            ;;
+        *) 
+            echo "invalid option $REPLY"
+            exit
+            ;;
+    esac
+done
+
+PS3='Please select a desktop environment to use: '
+options=("budgie" "gnome" "pantheon" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "budgie")
+            desktopenvironment="budgie"
+            break
+            ;;
+        "gnome")
+            desktopenvironment="gnome"
+            break
+            ;;
+        "pantheon")
+            desktopenvironment="pantheon"
+            exit
+            ;;
+        "Quit")
+            quit
+            ;;
+        *) 
+            echo "invalid option $REPLY"
+            exit
+            ;;
+    esac
+done
+
+echo $device 
+echo $displaymanager
+echo $desktopenvironment
 exit
 
 #refresh databases
@@ -131,6 +191,9 @@ case $desktopenvironment in
 
     gnome)
         de_to_install=$gnome_apps
+        ;;
+    pantheon)
+        de_to_install=$pantheon_apps
         ;;
     *)
         echo 'Invalid desktop environment selection. Installing gnome as default.'
