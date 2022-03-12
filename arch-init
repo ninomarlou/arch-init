@@ -85,11 +85,6 @@ do
     esac
 done
 
-echo $device 
-echo $displaymanager
-echo $desktopenvironment
-exit
-
 #refresh databases
 sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
 
