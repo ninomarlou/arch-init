@@ -56,6 +56,11 @@ case $displaymanager in
         dm_to_install="lightdm lightdm-slick-greeter"
         dm_to_start="lightdm.service"
         ;;
+    pantheon)
+        echo 'pantheon'
+        dm_to_install="lightdm lightdm-pantheon-greeter"
+        dm_to_start="lightdm.service"
+        ;;
     *)
         echo 'Invalid display manager selection. Installing gdm as default.'
         dm_to_install="gdm"
@@ -84,6 +89,10 @@ case $displaymanager in
         sudo sed -i 's/#logind-check-graphical=false/logind-check-graphical=true/' /etc/lightdm/lightdm.conf
         sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-slick-greeter/' /etc/lightdm/lightdm.conf
         ;;
+    pantheon)
+        sudo sed -i 's/#logind-check-graphical=false/logind-check-graphical=true/' /etc/lightdm/lightdm.conf
+        sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-pantheon-greeter/' /etc/lightdm/lightdm.conf
+        ;;
     *)
         ;;
 esac
@@ -92,7 +101,7 @@ esac
 # Apps to install based on  DE choices
 budgie_apps="budgie-desktop nautilus gnome-terminal gnome-tweak-tool gnome-shell-extensions gnome-control-center xdg-user-dirs network-manager-applet gvfs-smb accountsservice gnome-bluetooth gnome-menus gnome-session gnome-themes-extra graphene libibus libpeas libwnck3 mutter budgie-screensaver"
 gnome_apps="gnome-shell nautilus gnome-terminal gnome-tweak-tool gnome-control-center xdg-user-dirs networkmanager gnome-keyring gvfs-smb gnome-shell-extensions gnome-tweaks"
-
+pantheon_apps="pantheon-session pantheon-polkit-agent pantheon-settings-daemon pantheon-default-settings elementary-icon-theme elementary-wallpapers gtk-theme-elementary ttf-droid ttf-opensans ttf-roboto sound-theme-elementary pantheon-code pantheon-files pantheon-terminal pantheon-applications-menu wingpanel-indicator-datetime wingpanel-indicator-session switchboard"
 case $desktopenvironment in
     budgie)
         de_to_install=$budgie_apps
