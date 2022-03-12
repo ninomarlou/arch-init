@@ -168,7 +168,7 @@ case $displaymanager in
         ;;
     pantheon)
         sudo sed -i 's/#logind-check-graphical=false/logind-check-graphical=true/' /etc/lightdm/lightdm.conf
-        sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-pantheon-greeter/' /etc/lightdm/lightdm.conf
+        sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=io.elementary.greeter/' /etc/lightdm/lightdm.conf
         ;;
     *)
         ;;
@@ -208,10 +208,3 @@ do
     '
     eval "$cmd"
 done
-
-# --------------------- Create user --------------------------------
-if [[ $* == *-u* ]]; then
-    sudo useradd -m -g users -G wheel -s /bin/bash $username
-    passwd $username
-    sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-fi
