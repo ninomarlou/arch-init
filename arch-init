@@ -46,7 +46,7 @@ do
             ;;
         "pantheon")
             displaymanager="pantheon"
-            exit
+            break
             ;;
         "Quit")
             quit
@@ -73,7 +73,7 @@ do
             ;;
         "pantheon")
             desktopenvironment="pantheon"
-            exit
+            break
             ;;
         "Quit")
             quit
