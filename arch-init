@@ -8,19 +8,16 @@ do
     esac
 done
 
-PS3='Please enter your choice: '
-options=("Option 1" "Option 2" "Option 3" "Quit")
+PS3='Please select your device: '
+options=("[1] Laptop" "[2] Others" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Option 1")
-            echo "you chose choice 1"
+        "[1] Laptop")
+            echo "you chose laptop"
             ;;
-        "Option 2")
-            echo "you chose choice 2"
-            ;;
-        "Option 3")
-            echo "you chose choice $REPLY which is $opt"
+        "[2] Others")
+            echo "you chose another device"
             ;;
         "Quit")
             break
