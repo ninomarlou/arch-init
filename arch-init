@@ -8,6 +8,16 @@ do
     esac
 done
 
+while true; do
+    echo "Device: $device Display Manager: $displaymanager Desktop Environment: $desktopenvironment"
+    read -p "Do you want to proceed with this setup? " yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 #refresh databases
 sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
 
