@@ -1,13 +1,3 @@
-# while getopts d:m:e:u: flag
-# do
-#     case "${flag}" in
-#         d) device=${OPTARG};;
-#         m) displaymanager=${OPTARG};;
-#         e) desktopenvironment=${OPTARG};;
-#         u) username=${OPTARG};;
-#     esac
-# done
-
 PS3='Please select your device: '
 options=("Laptop" "Others" "Quit")
 select opt in "${options[@]}"
