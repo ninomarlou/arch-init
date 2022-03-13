@@ -75,7 +75,7 @@ do
     esac
 done
 
-# find fastest mirror
+# --------------------- FASTER MIRRORS  --------------------------------
 # check for dependecies
 package=pacman-contrib
 if pacman -Qs $package > /dev/null ; then
@@ -93,6 +93,22 @@ sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Syyu
 
 #run ranking
 sudo rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
+
+# --------------------- INSTALL YAY  --------------------------------
+package=yay
+if yay -Qs $package > /dev/null ; then
+  echo "Yay already installed."
+else
+  echo "Installing $package"
+  rm -rf /home/.opt
+  mkdir /home/.opt
+  cd /home/.opt
+  git clone https://aur.archlinux.org/yay-git.git
+  chown -R $USER /home/.opt/yay-git
+  cd /home/.opt/yay-git
+  makepkg -si
+  rm -rf /home/.opt
+fi
 
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
