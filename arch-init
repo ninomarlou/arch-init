@@ -86,7 +86,7 @@ else
 fi
 
 #backup current mirror list
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
 #refresh databases
 sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Syyu
@@ -96,7 +96,7 @@ sudo rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 # --------------------- INSTALL YAY  --------------------------------
 package=yay
-if yay -Qs $package > /dev/null ; then
+if sudo yay -Qs $package > /dev/null ; then
   echo "Yay already installed."
 else
   echo "Installing $package"
