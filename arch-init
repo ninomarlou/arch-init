@@ -101,8 +101,8 @@ rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
-laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics wget dconf-editor steam mpv"
-non_laptop_apps="nano sudo chromium git wget dconf-editor steam mpv"
+laptop_apps="nano sudo chromium tlp tlp-rdw xf86-input-synaptics wget dconf-editor steam mpv"
+non_laptop_apps="nano sudo chromium wget dconf-editor steam mpv"
 
 if [ $device = "laptop" ]; then
     cmd='
