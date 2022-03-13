@@ -100,14 +100,14 @@ if yay -Qs $package > /dev/null ; then
   echo "Yay already installed."
 else
   echo "Installing $package"
-  rm -rf /home/.opt
-  mkdir /home/.opt
+  sudo rm -rf /home/.opt
+  sudo mkdir /home/.opt
   cd /home/.opt
   git clone https://aur.archlinux.org/yay-git.git
-  chown -R $USER /home/.opt/yay-git
+  sudo chown -R $USER /home/.opt/yay-git
   cd /home/.opt/yay-git
-  makepkg -si
-  rm -rf /home/.opt
+  sudo makepkg -si
+  sudo rm -rf /home/.opt
 fi
 exit
 # --------------------- BASE APPS  --------------------------------
