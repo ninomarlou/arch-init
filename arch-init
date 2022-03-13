@@ -218,4 +218,4 @@ do
 done
 
 # --------------------- create DE ID file --------------------------------
-touch .$desktopenvironment
+touch /home/.$desktopenvironment
