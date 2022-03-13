@@ -94,7 +94,7 @@ pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
 #run ranking
 rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
-exit 0
+
 
 # --------------------- INSTALL YAY  --------------------------------
 package=yay
@@ -111,7 +111,7 @@ else
   makepkg -si
   rm -rf /home/.opt
 fi
-exit
+exit 0
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
 laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics"
