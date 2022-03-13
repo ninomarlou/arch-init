@@ -109,7 +109,7 @@ else
   makepkg -si
   rm -rf /home/.opt
 fi
-
+exit
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
 laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics"
