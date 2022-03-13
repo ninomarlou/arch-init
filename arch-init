@@ -218,4 +218,4 @@ do
 done
 
 # --------------------- create DE ID file --------------------------------
-touch /home/.$desktopenvironment
+echo DE=$desktopenvironment >> /home/nino/.bashrc
