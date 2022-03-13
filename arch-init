@@ -135,17 +135,14 @@ done
 
 case $displaymanager in
     gdm)
-        echo 'GDM'
         dm_to_install="gdm"
         dm_to_start="gdm.service"
         ;;
     lightdm)
-        echo 'LightDM'
         dm_to_install="lightdm lightdm-slick-greeter"
         dm_to_start="lightdm.service"
         ;;
     pantheon)
-        echo 'pantheon'
         dm_to_install="lightdm lightdm-pantheon-greeter"
         dm_to_start="lightdm.service"
         ;;
@@ -219,3 +216,6 @@ do
     '
     eval "$cmd"
 done
+
+# --------------------- create DE ID file --------------------------------
+touch .$desktopenvironment
