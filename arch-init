@@ -75,8 +75,24 @@ do
     esac
 done
 
+# find fastest mirror
+# check for dependecies
+package=pacman-contrib
+if pacman -Qs $package > /dev/null ; then
+  echo "    Required dependencies found."
+else
+  echo "    Installing dependencies: $package"
+  yes | sudo pacman -S pacman-contrib
+fi
+
+#backup current mirror list
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
+
 #refresh databases
-sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Su
+sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Syyu
+
+#run ranking
+sudo rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
