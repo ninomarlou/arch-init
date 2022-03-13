@@ -89,7 +89,7 @@ fi
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
 #refresh databases
-sudo pacman --noconfirm -S archlinux-keyring && sudo --noconfirm pacman -Syyu
+sudo pacman --noconfirm -S archlinux-keyring && sudo pacman --noconfirm -Syyu
 
 #run ranking
 sudo rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
