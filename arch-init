@@ -75,6 +75,9 @@ do
     esac
 done
 
+# --------------------- ENABLE MULTILIB  --------------------------------
+sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf 
+
 # --------------------- FASTER MIRRORS  --------------------------------
 # check for dependecies
 package=pacman-contrib
@@ -94,28 +97,12 @@ pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
 #run ranking
 rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
-# --------------------- INSTALL YAY  --------------------------------
-package=yay
-if yay -Qs $package > /dev/null ; then
-  echo "Yay already installed."
-else
-  echo "Installing $package"
-  rm -rf /home/.opt
-  mkdir /home/.opt
-  cd /home/.opt
-  su nino
-  git clone https://aur.archlinux.org/yay-git.git
-  chown -R $USER /home/.opt/yay-git
-  cd /home/.opt/yay-git
-  makepkg -si
-  su root
-  rm -rf /home/.opt
-fi
 exit 0
+
 # --------------------- BASE APPS  --------------------------------
 # Apps to install based on device, regardless of DM or DE choices
-laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics"
-non_laptop_apps="nano sudo chromium git"
+laptop_apps="nano sudo chromium git tlp tlp-rdw xf86-input-synaptics wget dconf-editor steam mpv"
+non_laptop_apps="nano sudo chromium git wget dconf-editor steam mpv"
 
 if [ $device = "laptop" ]; then
     cmd='
