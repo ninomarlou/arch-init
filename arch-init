@@ -94,6 +94,8 @@ pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
 #run ranking
 rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
+exit 0
+
 # --------------------- INSTALL YAY  --------------------------------
 package=yay
 if yay -Qs $package > /dev/null ; then
