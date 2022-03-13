@@ -78,7 +78,7 @@ done
 # --------------------- ENABLE MULTILIB  --------------------------------
 sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf 
 #refresh databases
-pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
+pacman --noconfirm -Sy
 
 
 # --------------------- FASTER MIRRORS  --------------------------------
