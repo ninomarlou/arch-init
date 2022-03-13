@@ -82,32 +82,32 @@ if pacman -Qs $package > /dev/null ; then
   echo "    Required dependencies found."
 else
   echo "    Installing dependencies: $package"
-  yes | sudo pacman -S pacman-contrib
+  yes | pacman -S pacman-contrib
 fi
 
 #backup current mirror list
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak 
 
 #refresh databases
-sudo pacman --noconfirm -S archlinux-keyring && sudo pacman --noconfirm -Syyu
+pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
 
 #run ranking
-sudo rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
+rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 # --------------------- INSTALL YAY  --------------------------------
 package=yay
-if sudo yay -Qs $package > /dev/null ; then
+if yay -Qs $package > /dev/null ; then
   echo "Yay already installed."
 else
   echo "Installing $package"
-  sudo rm -rf /home/.opt
-  sudo mkdir /home/.opt
+  rm -rf /home/.opt
+  mkdir /home/.opt
   cd /home/.opt
   git clone https://aur.archlinux.org/yay-git.git
-  sudo chown -R $USER /home/.opt/yay-git
+  chown -R $USER /home/.opt/yay-git
   cd /home/.opt/yay-git
   makepkg -si
-  sudo rm -rf /home/.opt
+  rm -rf /home/.opt
 fi
 exit
 # --------------------- BASE APPS  --------------------------------
