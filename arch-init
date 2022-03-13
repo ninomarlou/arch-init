@@ -95,7 +95,6 @@ pacman --noconfirm -S archlinux-keyring && pacman --noconfirm -Syyu
 rankmirrors /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist
 
 # --------------------- INSTALL YAY  --------------------------------
-su 
 package=yay
 if yay -Qs $package > /dev/null ; then
   echo "Yay already installed."
