@@ -106,7 +106,7 @@ else
   git clone https://aur.archlinux.org/yay-git.git
   sudo chown -R $USER /home/.opt/yay-git
   cd /home/.opt/yay-git
-  sudo makepkg -si
+  makepkg -si
   sudo rm -rf /home/.opt
 fi
 exit
